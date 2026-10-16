@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Khám phá Khu di tích Đô thị cổ Hội An - Di sản Văn hóa Thế giới UNESCO với lịch sử 400 năm, Chùa Cầu, nhà cổ Tấn Ký, ẩm thực Cao Lầu và đêm hội hoa đăng sông Hoài lung linh.">
+    <meta name="keywords" content="Hội An, di tích Hội An, Chùa Cầu, nhà cổ Tấn Ký, Hội quán Phúc Kiến, du lịch Hội An, công nghệ web">
+    <meta name="author" content="Sinh viên DUT - Đồ án Công Nghệ Web">
+    <title>Khu Di Tích Đô Thị Cổ Hội An - Di Sản Văn Hóa Thế Giới UNESCO</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/night-mode.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Floating Canvas for Night Lanterns Effect -->
+    <canvas id="lanternCanvas"></canvas>
+
+    <!-- SITE HEADER & NAVBAR -->
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a href="#" class="brand-logo" id="brandLogo">
+                <div class="logo-badge">🏮</div>
+                <div class="brand-title">
+                    <h1>HỘI AN HERITAGE</h1>
+                    <span>Di sản Văn hóa Thế giới</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#overviewSection" class="nav-link">Tổng quan</a></li>
+                    <li><a href="#relicsSection" class="nav-link">Điểm di tích</a></li>
+                    <li><a href="#mapSection" class="nav-link">Bản đồ phố cổ</a></li>
+                    <li><a href="#culinarySection" class="nav-link">Ẩm thực & Lộ trình</a></li>
+                    <li><a href="#bookingSection" class="nav-link">Đặt vé tham quan</a></li>
+                    <li><a href="#reviewsSection" class="nav-link">Cảm nhận</a></li>
+                </ul>
+            </nav>
+
+            <!-- Actions & Theme Toggle -->
+            <div class="nav-actions">
+                <button class="theme-toggle-btn" id="themeToggleBtn" title="Chuyển chế độ Ban ngày / Đêm hoa đăng">
+                    <span class="theme-icon" id="themeIcon">☀️</span>
+                    <span id="themeLabel">Ban Ngày</span>
+                </button>
+                <a href="#bookingSection" class="btn-primary" id="headerBookingBtn">
+                    Đặt vé ngay
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mở menu điều hướng">
+                    ☰
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero-section" id="heroSection">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-text-content">
+                        <div class="hero-badge">
+                            <span>🏛️ Di sản thế giới UNESCO từ năm 1999</span>
+                        </div>
+                        <h2 class="hero-title">
+                            Nơi thời gian lắng đọng trong <span>từng mái ngói rêu phong</span>
+                        </h2>
+                        <p class="hero-description">
+                            Thương cảng quốc tế sầm uất bậc nhất Đông Nam Á thế kỷ 16-17. Khám phá sự giao thoa kiến trúc văn hóa Việt - Nhật - Hoa vẹn nguyên bên dòng sông Hoài thơ mộng.
+                        </p>
+                        <div class="hero-cta-group">
+                            <a href="#relicsSection" class="btn-primary" id="exploreNowBtn">
+                                Khám phá các di tích →
+                            </a>
+                            <a href="#mapSection" class="btn-secondary" id="viewMapBtn">
+                                Xem bản đồ tương tác
+                            </a>
+                        </div>
+                        <div class="hero-quick-stats">
+                            <div class="stat-item">
+                                <h4>1.360+</h4>
+                                <p>Di tích kiến trúc cổ</p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>400+</h4>
+                                <p>Năm lịch sử thương cảng</p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>Top 10</h4>
+                                <p>Thành phố du lịch hàng đầu Châu Á</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Media Card -->
+                    <div class="hero-media-wrapper">
+                        <div class="hero-main-card">
+                            <img src="assets/images/hero.jpg" alt="Toàn cảnh đô thị cổ Hội An bên dòng sông Hoài lúc hoàng hôn" id="heroMainImage">
+                            <div class="hero-media-overlay">
+                                <h3>Hoàng hôn sông Hoài</h3>
+                                <p>Khung cảnh yên ả với những con thuyền gỗ và ánh đèn lồng rực sáng khi phố lên đèn.</p>
+                            </div>
+                        </div>
+
+                        <!-- Realtime Weather / Clock Floating Widget -->
+                        <div class="realtime-widget" id="realtimeWidget">
+                            <div class="weather-icon">🌤️</div>
+                            <div class="widget-info">
+                                <h5 id="hoianClock">18:30:00 (GMT+7)</h5>
+                                <p>Hội An 27°C • Gió mát ven sông Thu Bồn</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUDIO GUIDE PLAYER BAR -->
+        <section class="audio-guide-section" id="audioGuideSection">
+            <div class="container audio-guide-container">
+                <div class="audio-guide-info">
+                    <div class="audio-icon-pulse" id="audioPulseIcon" title="Thuyết minh âm thanh di sản">
+                        🎙️
+                    </div>
+                    <div class="audio-text">
+                        <h4>Thuyết Minh Âm Thanh: Âm Vang Phố Cổ Hội An</h4>
+                        <p>Lắng nghe câu chuyện thương nhân phương Đông và tiếng đàn tranh phố Hội</p>
+                    </div>
+                </div>
+
+                <div class="audio-controls">
+                    <button class="audio-btn" id="audioPlayToggle" title="Phát / Dừng">
+                        ▶
+                    </button>
+                    <div class="audio-progress-bar" id="audioProgressBar">
+                        <div class="audio-progress-fill" id="audioProgressFill"></div>
+                    </div>
+                    <span class="audio-time" id="audioTimeDisplay">00:38 / 04:05</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- HERITAGE OVERVIEW SECTION -->
+        <section class="section" id="overviewSection">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Dấu ấn thế kỷ</span>
+                    <h2 class="section-title">Bảo tàng sống của lịch sử đô thị phương Đông</h2>
+                    <p class="section-desc">
+                        Không giống bất kỳ đô thị nào tại Việt Nam, Hội An may mắn giữ được hầu như nguyên vẹn một quần thể di tích kiến trúc cổ mẫu mực từ thế kỷ 16 đến thế kỷ 19.
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px;">
+                    <div style="background: var(--bg-surface); padding: 32px; border-radius: var(--border-radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 32px; margin-bottom: 16px;">🏮</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Giao thoa văn hóa độc bản</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">
+                            Hội An là nơi hòa quyện sâu sắc giữa phong tục tập quán bản địa của người Việt với văn hóa thương nhân Nhật Bản, người Hoa và phương Tây qua từng mái ngói, bức chạm khắc.
+                        </p>
+                    </div>
+
+                    <div style="background: var(--bg-surface); padding: 32px; border-radius: var(--border-radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 32px; margin-bottom: 16px;">🪵</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Kiến trúc nhà gỗ truyền thống</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">
+                            Những ngôi nhà hình ống hàng trăm năm tuổi bằng gỗ lim quý, tường gạch quét vôi vàng nghệ và vì kèo mộng gỗ tài tình thích ứng hoàn hảo với khí hậu lũ lụt miền Trung.
+                        </p>
+                    </div>
+
+                    <div style="background: var(--bg-surface); padding: 32px; border-radius: var(--border-radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 32px; margin-bottom: 16px;">📜</div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 10px;">Lễ hội & Văn hóa phi vật thể</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">
+                            Nghệ thuật Hát Bài Chòi được UNESCO vinh danh, đêm hội hoa đăng rằm phố cổ, các làng nghề thủ công gốm Thanh Hà, mộc Kim Bồng lưu truyền hàng trăm năm.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RELICS CATALOG & SEARCH FILTER -->
+        <section class="section section-alt" id="relicsSection">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Kho báu di sản</span>
+                    <h2 class="section-title">Khám phá các điểm di tích tiêu biểu</h2>
+                    <p class="section-desc">
+                        Tra cứu thông tin lịch sử, niên đại xây dựng, giờ mở cửa và đặc trưng kiến trúc của từng công trình lịch sử tại Hội An.
+                    </p>
+                </div>
+
+                <!-- Filter & Search Bar -->
+                <div class="catalog-filter-bar">
+                    <ul class="filter-pills" id="filterPills">
+                        <li><button class="filter-btn active" data-category="all">Tất cả</button></li>
+                        <li><button class="filter-btn" data-category="nhat-ban">Dấu ấn Nhật Bản</button></li>
+                        <li><button class="filter-btn" data-category="hoi-quan">Hội quán Hoa Kiều</button></li>
+                        <li><button class="filter-btn" data-category="nha-co">Nhà cổ truyền thống</button></li>
+                        <li><button class="filter-btn" data-category="tam-linh">Bến sông & Tâm linh</button></li>
+                    </ul>
+
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" id="relicSearchInput" placeholder="Tìm di tích, tên đường, từ khóa...">
+                    </div>
+                </div>
+
+                <!-- Relics Grid -->
+                <div class="relics-grid" id="relicsGrid">
+                    <!-- Dynamic rendering from js/main.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE HERITAGE MAP SECTION -->
+        <section class="section" id="mapSection">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Trực quan không gian</span>
+                    <h2 class="section-title">Bản đồ tương tác các di tích phố cổ</h2>
+                    <p class="section-desc">
+                        Nhấp chuột vào từng điểm di tích trên bản đồ để xem vị trí tọa độ, hình ảnh thực tế và cự ly di chuyển bộ dọc theo các tuyến đường di sản.
+                    </p>
+                </div>
+
+                <div class="map-layout">
+                    <!-- Map Canvas Area -->
+                    <div class="map-view-container" id="interactiveMapContainer">
+                        <!-- Main Streets Simulation -->
+                        <div class="map-street street-tran-phu"></div>
+                        <div class="map-street street-bach-dang"></div>
+
+                        <!-- River Simulation -->
+                        <div class="map-river">
+                            <span class="map-river-label">Sông Hoài (Nhánh Thu Bồn)</span>
+                        </div>
+
+                        <!-- Pins will be populated by js/main.js -->
+                    </div>
+
+                    <!-- Map Sidebar Info Preview -->
+                    <div class="map-sidebar">
+                        <div id="mapSidebarPreview" class="map-sidebar-preview">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CULINARY & EXPERIENCES SECTION -->
+        <section class="section section-alt" id="culinarySection">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Hương vị & Trải nghiệm</span>
+                    <h2 class="section-title">Tinh hoa ẩm thực & Lộ trình khám phá</h2>
+                    <p class="section-desc">
+                        Thưởng thức những món ăn nức tiếng xứ Quảng và tham khảo các lịch trình được tối ưu hóa cho từng đối tượng tham quan.
+                    </p>
+                </div>
+
+                <!-- Culinary Grid -->
+                <h3 style="font-size: 1.6rem; margin-bottom: 24px; color: var(--color-primary);">🥢 Ẩm thực trứ danh phố Hội</h3>
+                <div class="culinary-grid" id="culinaryGrid" style="margin-bottom: 56px;">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Tours Grid -->
+                <h3 style="font-size: 1.6rem; margin-bottom: 24px; color: var(--color-primary);">🗺️ Tuyến tham quan di sản gợi ý</h3>
+                <div class="tours-grid" id="toursGrid">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOKING & TOUR REGISTRATION -->
+        <section class="section" id="bookingSection">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Dịch vụ tham quan</span>
+                    <h2 class="section-title">Đặt vé tham quan & Đăng ký thuyết minh viên</h2>
+                    <p class="section-desc">
+                        Hệ thống đăng ký vé tham quan trọn gói các di tích Hội An. Nhận vé điện tử có mã QR check-in ngay lập tức.
+                    </p>
+                </div>
+
+                <div class="booking-container">
+                    <!-- Left: Form -->
+                    <div class="booking-form-wrap">
+                        <div class="booking-form-header">
+                            <h3>Thông tin đăng ký vé di sản</h3>
+                            <p style="font-size: 0.88rem; color: var(--text-muted);">Vui lòng nhập chính xác thông tin để nhận vé điện tử qua hệ thống.</p>
+                        </div>
+
+                        <form id="bookingForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="bookFullname">Họ và tên người đại diện *</label>
+                                    <input type="text" id="bookFullname" class="form-control" placeholder="Ví dụ: Nguyễn Văn An" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="bookPhone">Số điện thoại liên hệ *</label>
+                                    <input type="tel" id="bookPhone" class="form-control" placeholder="Ví dụ: 0905123456" required>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label class="form-label" for="bookEmail">Địa chỉ Email nhận vé điện tử *</label>
+                                    <input type="email" id="bookEmail" class="form-control" placeholder="Ví dụ: customer@example.com" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="bookVisitDate">Ngày tham quan dự kiến *</label>
+                                    <input type="date" id="bookVisitDate" class="form-control" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="bookTicketType">Loại vé tham quan</label>
+                                    <select id="bookTicketType" class="form-control">
+                                        <option value="combo_heritage">Vé trọn gói di sản (5 điểm tùy chọn)</option>
+                                        <option value="night_tour">Combo Thuyền hoa đăng + Di tích</option>
+                                        <option value="vip_all">Vé VIP không giới hạn điểm đến</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="bookAdultQty">Số lượng người lớn (120.000đ/vé)</label>
+                                    <input type="number" id="bookAdultQty" class="form-control" min="1" max="50" value="2">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="bookChildQty">Số lượng trẻ em (60.000đ/vé)</label>
+                                    <input type="number" id="bookChildQty" class="form-control" min="0" max="50" value="0">
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label class="checkbox-group">
+                                        <input type="checkbox" id="bookNeedGuide">
+                                        <span class="form-label" style="margin: 0;">Đăng ký hướng dẫn viên / thuyết minh viên chuyên nghiệp (+200.000đ/đoàn)</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label class="form-label" for="bookGuideLang">Ngôn ngữ thuyết minh</label>
+                                    <select id="bookGuideLang" class="form-control">
+                                        <option value="vi">Tiếng Việt</option>
+                                        <option value="en">Tiếng Anh (English)</option>
+                                        <option value="ja">Tiếng Nhật (Japanese)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label class="form-label" for="bookNotes">Yêu cầu đặc biệt (Ghi chú)</label>
+                                    <textarea id="bookNotes" class="form-control" rows="2" placeholder="Ghi chú thêm nếu quý khách cần hỗ trợ xe lăn hoặc đoàn học sinh..."></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 14px; font-size: 1rem;" id="submitBookingBtn">
+                                Xác nhận đặt vé & Xuất E-Ticket
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Right: Pricing Breakdown Summary -->
+                    <div class="booking-sidebar-summary">
+                        <div>
+                            <h4 style="font-size: 1.3rem; margin-bottom: 12px; color: var(--color-primary);">Chi tiết thanh toán</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Giá vé đã bao gồm bảo hiểm du lịch và phí bảo tồn di tích theo quy định của Ban Quản lý Di sản Hội An.</p>
+
+                            <div class="pricing-breakdown">
+                                <div class="price-row">
+                                    <span>Vé người lớn:</span>
+                                    <strong id="summaryAdultTotal">240.000 đ (2 vé)</strong>
+                                </div>
+                                <div class="price-row">
+                                    <span>Vé trẻ em:</span>
+                                    <strong id="summaryChildTotal">0 đ (0 vé)</strong>
+                                </div>
+                                <div class="price-row" id="summaryGuideRow" style="display: none;">
+                                    <span>Phí thuyết minh viên:</span>
+                                    <strong>200.000 đ</strong>
+                                </div>
+                                <div class="price-row total">
+                                    <span>Tổng số tiền:</span>
+                                    <span id="summaryFinalTotal">240.000 VNĐ</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(180, 83, 9, 0.08); border-radius: 8px; padding: 16px; border: 1px solid rgba(180, 83, 9, 0.2);">
+                            <div style="font-weight: bold; font-size: 0.85rem; color: var(--color-primary); margin-bottom: 4px;">Quyền lợi vé tham quan:</div>
+                            <ul style="font-size: 0.8rem; color: var(--text-muted); padding-left: 18px; line-height: 1.6;">
+                                <li>Tham quan di tích không giới hạn thời gian trong ngày</li>
+                                <li>Miễn phí thưởng thức biểu diễn nghệ thuật cổ truyền</li>
+                                <li>Xem biểu diễn Hát Bài Chòi tại vườn tượng An Hội</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REVIEWS & GUESTBOOK -->
+        <section class="section section-alt" id="reviewsSection">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Sổ lưu bút</span>
+                    <h2 class="section-title">Cảm nhận từ khách tham quan</h2>
+                    <p class="section-desc">
+                        Lắng nghe những kỷ niệm đáng nhớ của du khách trong và ngoài nước khi ghé thăm phố cổ.
+                    </p>
+                </div>
+
+                <!-- Reviews Grid -->
+                <div class="reviews-grid" id="reviewsGrid">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Review Form -->
+                <div class="review-form-box">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 8px; text-align: center;">Chia sẻ cảm nghĩ của bạn về Hội An</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-bottom: 24px;">Đóng góp của bạn giúp bảo tồn và lan tỏa giá trị di sản tới cộng đồng.</p>
+
+                    <form id="reviewForm">
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 20px;">
+                            <span style="font-size: 0.9rem; font-weight: 600;">Đánh giá của bạn:</span>
+                            <div id="interactiveStarPicker" style="display: flex; gap: 4px; font-size: 24px; cursor: pointer;">
+                                <span class="star-pick-item" data-val="1">★</span>
+                                <span class="star-pick-item" data-val="2">★</span>
+                                <span class="star-pick-item" data-val="3">★</span>
+                                <span class="star-pick-item" data-val="4">★</span>
+                                <span class="star-pick-item" data-val="5">★</span>
+                            </div>
+                        </div>
+
+                        <div class="form-grid" style="margin-bottom: 16px;">
+                            <div class="form-group">
+                                <label class="form-label" for="revAuthorName">Họ và tên của bạn *</label>
+                                <input type="text" id="revAuthorName" class="form-control" placeholder="Ví dụ: Lê Minh Trí" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="revAuthorOrigin">Đến từ (Tỉnh/Thành/Quốc gia)</label>
+                                <input type="text" id="revAuthorOrigin" class="form-control" placeholder="Ví dụ: Huế, TP. Hồ Chí Minh, Tokyo...">
+                            </div>
+                            <div class="form-group full-width">
+                                <label class="form-label" for="revComment">Cảm nhận của bạn về cảnh quan, con người và ẩm thực Hội An *</label>
+                                <textarea id="revComment" class="form-control" rows="3" placeholder="Chia sẻ kỷ niệm đẹp của bạn..." required></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary" style="margin: 0 auto; display: block; padding: 10px 28px;">
+                            Gửi cảm nhận lưu bút
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Khu Di Tích Đô Thị Cổ Hội An</h4>
+                    <p>
+                        Trung tâm Quản lý Bảo tồn Di sản Văn hóa Hội An. Điểm hẹn giao thoa kiến trúc, văn hóa nghệ thuật và ẩm thực truyền thống Việt Nam.
+                    </p>
+                    <p style="font-size: 0.82rem; color: #78716c;">
+                        📍 Địa chỉ: Số 10B Trần Hưng Đạo, TP. Hội An, Tỉnh Quảng Nam<br>
+                        📞 Hotline hỗ trợ du khách: (0235) 3861 327<br>
+                        ✉️ Email: ttqldi tichhoian@quangnam.gov.vn
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Liên kết nhanh</h4>
+                    <ul class="footer-links">
+                        <li><a href="#overviewSection">Tổng quan lịch sử</a></li>
+                        <li><a href="#relicsSection">Danh mục di tích</a></li>
+                        <li><a href="#mapSection">Bản đồ phố cổ</a></li>
+                        <li><a href="#culinarySection">Đặc sản ẩm thực</a></li>
+                        <li><a href="#bookingSection">Đặt vé điện tử</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Di tích nổi bật</h4>
+                    <ul class="footer-links">
+                        <li><a href="#relicsSection" onclick="openRelicDetail(1)">Chùa Cầu Nhật Bản</a></li>
+                        <li><a href="#relicsSection" onclick="openRelicDetail(2)">Nhà cổ Tấn Ký</a></li>
+                        <li><a href="#relicsSection" onclick="openRelicDetail(3)">Hội quán Phúc Kiến</a></li>
+                        <li><a href="#relicsSection" onclick="openRelicDetail(4)">Bến hoa đăng sông Hoài</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Đồ Án Môn Học</h4>
+                    <p style="font-size: 0.88rem;">
+                        <strong>Học phần:</strong> Công Nghệ Web (Kỳ 7)<br>
+                        <strong>Khoa:</strong> Công Nghệ Thông Tin<br>
+                        <strong>Trường:</strong> Đại học Bách Khoa - ĐH Đà Nẵng (DUT)<br>
+                        <strong>Công nghệ:</strong> HTML5, CSS3, JavaScript ES6, PHP & MySQL REST API.
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Đồ Án Công Nghệ Web - Website Giới Thiệu Khu Di Tích Hội An. Bản quyền nội dung & nghiên cứu thuộc về nhóm thực hiện.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- RELIC DETAIL MODAL POPUP -->
+    <div class="modal-backdrop" id="relicModal">
+        <div class="ticket-modal-card" style="max-width: 680px;">
+            <button class="btn-close-modal" id="closeRelicModalBtn">✕</button>
+            <div id="relicModalBody">
+                <!-- Injected by js/main.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- E-TICKET PREVIEW MODAL -->
+    <div class="modal-backdrop" id="ticketModal">
+        <div class="ticket-modal-card">
+            <button class="btn-close-modal" id="closeTicketModalBtn">✕</button>
+            <div class="ticket-header">
+                <h3>VÉ ĐIỆN TỬ THAM QUAN PHỐ CỔ</h3>
+                <p style="font-size: 0.82rem; opacity: 0.9;">Ban Quản lý Khu di tích Đô thị cổ Hội An</p>
+            </div>
+            <div class="ticket-content" id="ticketModalBody">
+                <!-- Injected by js/booking.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/booking.js"></script>
+    <script src="js/reviews.js"></script>
+</body>
+</html>
